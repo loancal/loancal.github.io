@@ -14,15 +14,15 @@ const homePath = locale === 'en' ? '/' : `/${locale}/`;
 ---
 
 <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-theme-bg/90 border-b border-theme-border/40 transition-colors duration-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
     <!-- Brand Logo -->
     <a
       href={homePath}
-      class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent rounded-lg p-1"
+      class="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent rounded-lg py-1 pr-1"
       aria-label="LoanCal Home"
     >
-      <div class="w-10 h-10 rounded-xl bg-palette-mocha dark:bg-palette-slate flex items-center justify-center shadow-soft text-palette-cream dark:text-palette-mocha group-hover:scale-105 transition-transform duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-palette-mocha dark:bg-palette-slate flex items-center justify-center shadow-soft text-palette-cream dark:text-palette-mocha group-hover:scale-105 transition-transform duration-200 shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
           <rect width="16" height="20" x="4" y="2" rx="2" />
           <line x1="8" x2="16" y1="6" y2="6" />
           <line x1="16" x2="16" y1="14" y2="18" />
@@ -36,32 +36,35 @@ const homePath = locale === 'en' ? '/' : `/${locale}/`;
         </svg>
       </div>
       <div class="flex flex-col">
-        <span class="text-xl font-extrabold tracking-tight text-theme-text flex items-center gap-1.5 leading-none">
+        <span class="text-lg sm:text-xl font-extrabold tracking-tight text-theme-text flex items-center gap-1.5 leading-none">
           LoanCal
           <span class="inline-block w-1.5 h-1.5 rounded-full bg-palette-slate"></span>
         </span>
-        <span class="text-[11px] font-medium text-theme-textMuted uppercase tracking-wider hidden sm:inline-block mt-0.5">
+        <span class="text-[10px] font-medium text-theme-textMuted uppercase tracking-wider hidden xl:inline-block mt-0.5">
           {t.nav.logoBadge}
         </span>
       </div>
     </a>
 
-    <!-- Action Group -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Language Selector Dropdown -->
+    <!-- Action Group: Minimal Icon-Only Mode on Mobile & Tablet (< lg), Full Text on Desktop (>= lg) -->
+    <div class="flex items-center gap-1.5 sm:gap-2 lg:gap-3">
+      <!-- 1. Language Dropdown Selector -->
       <div class="relative" id="lang-dropdown-wrapper">
         <button
           type="button"
           id="lang-dropdown-btn"
           aria-expanded="false"
           aria-haspopup="true"
-          class="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 rounded-lg border border-theme-border/60 bg-theme-card/60 hover:bg-theme-card text-theme-text text-xs sm:text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-theme-accent"
+          class="w-9 h-9 sm:w-10 sm:h-10 lg:w-auto lg:h-10 flex items-center justify-center lg:px-3 lg:py-2 rounded-xl border border-theme-border/70 bg-theme-card/60 hover:bg-theme-card text-theme-text text-xs sm:text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-theme-accent shrink-0"
           aria-label={t.nav.changeLanguage}
+          title={t.nav.changeLanguage}
         >
-          <span class="text-base leading-none">{currentLocaleObj.flag}</span>
-          <span class="hidden md:inline">{currentLocaleObj.nativeName}</span>
-          <span class="md:hidden uppercase text-xs font-semibold">{currentLocaleObj.code}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-70 transition-transform duration-200" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Mobile & Tablet: Flag icon only -->
+          <span class="text-base sm:text-lg leading-none select-none">{currentLocaleObj.flag}</span>
+          
+          <!-- Desktop Only: Native Name & Chevron -->
+          <span class="hidden lg:inline ml-2">{currentLocaleObj.nativeName}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="hidden lg:inline ml-1.5 w-3.5 h-3.5 opacity-70 transition-transform duration-200" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
@@ -69,7 +72,7 @@ const homePath = locale === 'en' ? '/' : `/${locale}/`;
         <!-- Dropdown Menu -->
         <div
           id="lang-menu"
-          class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-theme-bg dark:bg-palette-mocha border border-theme-border shadow-soft-lg py-1.5 z-50 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100"
+          class="hidden absolute right-0 mt-2 w-48 rounded-2xl bg-theme-bg dark:bg-palette-mocha border border-theme-border shadow-soft-lg py-1.5 z-50 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100"
           role="menu"
           aria-orientation="vertical"
         >
@@ -101,16 +104,16 @@ const homePath = locale === 'en' ? '/' : `/${locale}/`;
         </div>
       </div>
 
-      <!-- Theme Switcher Button -->
+      <!-- 2. Theme Switcher Button (Clean Icon) -->
       <button
         type="button"
         id="theme-toggle-btn"
-        class="w-9 h-9 flex items-center justify-center rounded-lg border border-theme-border/60 bg-theme-card/60 hover:bg-theme-card text-theme-text transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-theme-accent"
+        class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl border border-theme-border/70 bg-theme-card/60 hover:bg-theme-card text-theme-text transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-theme-accent shrink-0"
         aria-label="Toggle light or dark theme"
         title={t.nav.themeDark}
       >
         <!-- Sun Icon (shown in dark mode) -->
-        <svg id="theme-sun-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block text-palette-cream" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-sun-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-4.5 sm:h-4.5 hidden dark:block text-palette-cream" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2"></path>
           <path d="M12 20v2"></path>
@@ -122,30 +125,32 @@ const homePath = locale === 'en' ? '/' : `/${locale}/`;
           <path d="m19.07 4.93-1.41 1.41"></path>
         </svg>
         <!-- Moon Icon (shown in light mode) -->
-        <svg id="theme-moon-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 block dark:hidden text-palette-mocha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-moon-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-4.5 sm:h-4.5 block dark:hidden text-palette-mocha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
         </svg>
       </button>
 
-      <!-- Prominent 'Support the Developer' CTA (linking exactly to buymeacoffee.com/kisharadilz) -->
+      <!-- 3. Prominent 'Support the Developer' CTA (Icon-Only on Mobile & Tablet, Full Pill on Desktop) -->
       <a
         href="https://buymeacoffee.com/kisharadilz"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-palette-slate hover:bg-[#a3b3bf] dark:bg-palette-slate dark:hover:bg-[#c3d1dc] text-[#1a252e] font-semibold text-xs sm:text-sm shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all focus:outline-none focus:ring-2 focus:ring-palette-mocha border border-palette-slate/40"
+        class="w-9 h-9 sm:w-10 sm:h-10 lg:w-auto lg:h-10 flex items-center justify-center lg:px-4 lg:py-2 rounded-xl bg-palette-slate hover:bg-[#a3b3bf] dark:bg-palette-slate dark:hover:bg-[#c3d1dc] text-[#1a252e] font-semibold text-xs sm:text-sm shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all focus:outline-none focus:ring-2 focus:ring-palette-mocha border border-palette-slate/40 shrink-0"
         title="Support Kishara Dilz on Buy Me a Coffee"
+        aria-label="Support the Developer on Buy Me a Coffee"
       >
         <!-- Coffee Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0 text-[#1a252e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-4.5 sm:h-4.5 shrink-0 text-[#1a252e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
           <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
           <line x1="6" x2="6" y1="2" y2="4"></line>
           <line x1="10" x2="10" y1="2" y2="4"></line>
           <line x1="14" x2="14" y1="2" y2="4"></line>
         </svg>
-        <span class="whitespace-nowrap tracking-tight">
-          <span class="hidden sm:inline">{t.nav.support}</span>
-          <span class="sm:hidden">Support</span>
+        
+        <!-- Full Text Label: Visible on Desktop (lg+) Only -->
+        <span class="hidden lg:inline ml-2 whitespace-nowrap tracking-tight font-bold">
+          {t.nav.support}
         </span>
       </a>
     </div>

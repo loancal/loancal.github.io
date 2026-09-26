@@ -387,18 +387,18 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
   const fmt = (val: number) => formatCurrency(val, currency, locale === 'en' ? 'en-US' : locale);
 
   return (
-    <div className="w-full space-y-8">
-      {/* Quick Presets Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-theme-card/50 border border-theme-border/50 backdrop-blur-sm">
-        <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-theme-textMuted">
-          <Sparkles className="w-4 h-4 text-theme-accent" />
+    <div className="w-full space-y-6 sm:space-y-8">
+      {/* Quick Presets Bar: Flex-col on small mobile, row on tablet/desktop */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 p-3 sm:p-3.5 rounded-2xl bg-theme-card/50 border border-theme-border/50 backdrop-blur-sm">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-theme-textMuted shrink-0">
+          <Sparkles className="w-4 h-4 text-theme-accent shrink-0" />
           <span>{t.calculator.presetsTitle}:</span>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full sm:w-auto">
           <button
             type="button"
             onClick={() => applyPreset('mortgage')}
-            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
               activePreset === 'mortgage'
                 ? 'bg-palette-slate text-[#1a252e] font-bold shadow-soft'
                 : 'bg-theme-bg/60 hover:bg-theme-bg text-theme-text border border-theme-border/40'
@@ -409,7 +409,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
           <button
             type="button"
             onClick={() => applyPreset('auto')}
-            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
               activePreset === 'auto'
                 ? 'bg-palette-slate text-[#1a252e] font-bold shadow-soft'
                 : 'bg-theme-bg/60 hover:bg-theme-bg text-theme-text border border-theme-border/40'
@@ -420,7 +420,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
           <button
             type="button"
             onClick={() => applyPreset('personal')}
-            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
               activePreset === 'personal'
                 ? 'bg-palette-slate text-[#1a252e] font-bold shadow-soft'
                 : 'bg-theme-bg/60 hover:bg-theme-bg text-theme-text border border-theme-border/40'
@@ -431,7 +431,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
           <button
             type="button"
             onClick={handleReset}
-            className="p-1.5 rounded-xl text-theme-textMuted hover:text-theme-text hover:bg-theme-bg/80 transition-all border border-transparent hover:border-theme-border/40"
+            className="p-1.5 rounded-xl text-theme-textMuted hover:text-theme-text hover:bg-theme-bg/80 transition-all border border-transparent hover:border-theme-border/40 shrink-0"
             title={t.calculator.reset}
             aria-label={t.calculator.reset}
           >
@@ -444,11 +444,11 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: Sliders & Form Inputs */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="p-6 sm:p-7 rounded-3xl bg-theme-card border border-theme-border shadow-soft transition-colors">
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-theme-border/50">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-theme-text flex items-center gap-2.5">
-                <Calculator className="w-6 h-6 text-palette-mocha dark:text-palette-slate" />
-                {t.calculator.heading}
+          <div className="p-4 sm:p-7 rounded-3xl bg-theme-card border border-theme-border shadow-soft transition-colors">
+            <div className="flex items-center justify-between mb-5 sm:mb-6 pb-3 sm:pb-4 border-b border-theme-border/50 gap-2">
+              <h2 className="text-lg sm:text-2xl font-extrabold text-theme-text flex items-center gap-2">
+                <Calculator className="w-5 h-5 sm:w-6 sm:h-6 text-palette-mocha dark:text-palette-slate shrink-0" />
+                <span className="truncate">{t.calculator.heading}</span>
               </h2>
               {/* Currency Selector */}
               <div className="flex items-center gap-2">
@@ -473,13 +473,13 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
             <div className="space-y-6">
               {/* Input 1: Loan Amount */}
               <div className="space-y-2.5">
-                <div className="flex justify-between items-center">
-                  <label htmlFor="loan-amount-input" className="text-sm font-bold text-theme-text flex items-center gap-1.5">
-                    <DollarSign className="w-4 h-4 text-theme-textMuted" />
-                    {t.calculator.loanAmount}
+                <div className="flex justify-between items-center gap-2">
+                  <label htmlFor="loan-amount-input" className="text-xs sm:text-sm font-bold text-theme-text flex items-center gap-1.5">
+                    <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-theme-textMuted shrink-0" />
+                    <span className="truncate">{t.calculator.loanAmount}</span>
                   </label>
-                  <div className="relative flex items-center">
-                    <span className="absolute left-3 font-bold text-theme-textMuted text-sm">{currency}</span>
+                  <div className="relative flex items-center shrink-0">
+                    <span className="absolute left-2.5 sm:left-3 font-bold text-theme-textMuted text-xs sm:text-sm">{currency}</span>
                     <input
                       id="loan-amount-input"
                       type="text"
@@ -487,7 +487,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                       value={principalInput}
                       onChange={(e) => handlePrincipalChange(e.target.value)}
                       onBlur={() => setPrincipalInput(principal.toLocaleString())}
-                      className="w-36 sm:w-44 pl-7 pr-3 py-1.5 rounded-xl font-mono text-sm sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
+                      className="w-32 sm:w-44 pl-6 sm:pl-7 pr-2.5 sm:pr-3 py-1.5 rounded-xl font-mono text-xs sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
                       placeholder={t.calculator.loanAmountPlaceholder}
                     />
                   </div>
@@ -501,7 +501,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                   onChange={(e) => handlePrincipalSlider(parseFloat(e.target.value))}
                   aria-label={t.calculator.loanAmount}
                 />
-                <div className="flex justify-between text-[11px] font-mono font-medium text-theme-textMuted">
+                <div className="flex justify-between text-[10px] sm:text-[11px] font-mono font-medium text-theme-textMuted">
                   <span>{fmt(1000)}</span>
                   <span>{fmt(locale === 'ja' ? 50000000 : 750000)}</span>
                   <span>{fmt(locale === 'ja' ? 100000000 : 1500000)}</span>
@@ -510,12 +510,12 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
 
               {/* Input 2: Interest Rate */}
               <div className="space-y-2.5">
-                <div className="flex justify-between items-center">
-                  <label htmlFor="interest-rate-input" className="text-sm font-bold text-theme-text flex items-center gap-1.5">
-                    <Percent className="w-4 h-4 text-theme-textMuted" />
-                    {t.calculator.interestRate}
+                <div className="flex justify-between items-center gap-2">
+                  <label htmlFor="interest-rate-input" className="text-xs sm:text-sm font-bold text-theme-text flex items-center gap-1.5">
+                    <Percent className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-theme-textMuted shrink-0" />
+                    <span className="truncate">{t.calculator.interestRate}</span>
                   </label>
-                  <div className="relative flex items-center">
+                  <div className="relative flex items-center shrink-0">
                     <input
                       id="interest-rate-input"
                       type="text"
@@ -523,10 +523,10 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                       value={rateInput}
                       onChange={(e) => handleRateChange(e.target.value)}
                       onBlur={() => setRateInput(annualRate.toString())}
-                      className="w-28 sm:w-32 pr-7 pl-3 py-1.5 rounded-xl font-mono text-sm sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
+                      className="w-24 sm:w-32 pr-6 sm:pr-7 pl-2.5 sm:pl-3 py-1.5 rounded-xl font-mono text-xs sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
                       placeholder={t.calculator.interestRatePlaceholder}
                     />
-                    <span className="absolute right-3 font-bold text-theme-textMuted text-sm">%</span>
+                    <span className="absolute right-2.5 sm:right-3 font-bold text-theme-textMuted text-xs sm:text-sm">%</span>
                   </div>
                 </div>
                 <input
@@ -538,7 +538,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                   onChange={(e) => handleRateSlider(parseFloat(e.target.value))}
                   aria-label={t.calculator.interestRate}
                 />
-                <div className="flex justify-between text-[11px] font-mono font-medium text-theme-textMuted">
+                <div className="flex justify-between text-[10px] sm:text-[11px] font-mono font-medium text-theme-textMuted">
                   <span>0.1%</span>
                   <span>5.0%</span>
                   <span>12.0%</span>
@@ -548,18 +548,19 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
 
               {/* Input 3: Loan Term */}
               <div className="space-y-2.5">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <label htmlFor="loan-term-input" className="text-sm font-bold text-theme-text flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-theme-textMuted" />
-                      {t.calculator.loanTerm}
+                <div className="flex justify-between items-center gap-2">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <label htmlFor="loan-term-input" className="text-xs sm:text-sm font-bold text-theme-text flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-theme-textMuted shrink-0" />
+                      <span className="hidden sm:inline">{t.calculator.loanTerm}</span>
+                      <span className="sm:hidden">Term</span>
                     </label>
                     {/* Years / Months Toggle */}
-                    <div className="inline-flex rounded-lg border border-theme-border p-0.5 bg-theme-bg text-xs">
+                    <div className="inline-flex rounded-lg border border-theme-border p-0.5 bg-theme-bg text-[11px] sm:text-xs">
                       <button
                         type="button"
                         onClick={() => handleTermModeToggle('years')}
-                        className={`px-2 py-0.5 rounded-md font-semibold transition-all ${
+                        className={`px-1.5 sm:px-2 py-0.5 rounded-md font-semibold transition-all ${
                           termMode === 'years'
                             ? 'bg-palette-slate text-[#1a252e]'
                             : 'text-theme-textMuted hover:text-theme-text'
@@ -570,7 +571,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                       <button
                         type="button"
                         onClick={() => handleTermModeToggle('months')}
-                        className={`px-2 py-0.5 rounded-md font-semibold transition-all ${
+                        className={`px-1.5 sm:px-2 py-0.5 rounded-md font-semibold transition-all ${
                           termMode === 'months'
                             ? 'bg-palette-slate text-[#1a252e]'
                             : 'text-theme-textMuted hover:text-theme-text'
@@ -580,7 +581,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                       </button>
                     </div>
                   </div>
-                  <div className="relative flex items-center">
+                  <div className="relative flex items-center shrink-0">
                     <input
                       id="loan-term-input"
                       type="text"
@@ -590,7 +591,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                       onBlur={() =>
                         setTermInput(termMode === 'years' ? termYears.toString() : termMonths.toString())
                       }
-                      className="w-24 sm:w-28 pr-3 pl-3 py-1.5 rounded-xl font-mono text-sm sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
+                      className="w-20 sm:w-28 pr-2.5 sm:pr-3 pl-2.5 sm:pl-3 py-1.5 rounded-xl font-mono text-xs sm:text-base font-bold bg-theme-bg text-theme-text border border-theme-border text-right focus:outline-none focus:ring-2 focus:ring-palette-slate shadow-inner"
                     />
                   </div>
                 </div>
@@ -603,7 +604,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
                   onChange={(e) => handleTermSlider(parseInt(e.target.value, 10))}
                   aria-label={t.calculator.loanTerm}
                 />
-                <div className="flex justify-between text-[11px] font-mono font-medium text-theme-textMuted">
+                <div className="flex justify-between text-[10px] sm:text-[11px] font-mono font-medium text-theme-textMuted">
                   {termMode === 'years' ? (
                     <>
                       <span>1 yr</span>
@@ -624,10 +625,11 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
             </div>
 
             {/* Micro Trust Banner */}
-            <div className="mt-8 pt-4 border-t border-theme-border/50 flex items-center justify-between text-xs text-theme-textMuted">
+            <div className="mt-6 sm:mt-8 pt-4 border-t border-theme-border/50 flex items-center justify-between text-[11px] sm:text-xs text-theme-textMuted">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-palette-slate" />
-                100% Client-Side Computation
+                <ShieldCheck className="w-4 h-4 text-palette-slate shrink-0" />
+                <span className="hidden sm:inline">100% Client-Side Computation</span>
+                <span className="sm:hidden">100% Client-Side</span>
               </span>
               <span className="font-mono">Zero Server Calls</span>
             </div>
@@ -637,10 +639,10 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
         {/* Right Column: Key Outputs & Visual Donut */}
         <div className="lg:col-span-5 space-y-6">
           {/* Main EMI Highlight Card */}
-          <div className="p-6 sm:p-7 rounded-3xl bg-theme-card border-2 border-palette-slate shadow-soft-lg transition-all relative overflow-hidden">
+          <div className="p-5 sm:p-7 rounded-3xl bg-theme-card border-2 border-palette-slate shadow-soft-lg transition-all relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-palette-slate/15 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none" />
 
-            <div className="flex items-center justify-between text-xs font-bold text-theme-textMuted uppercase tracking-wider mb-2">
+            <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold text-theme-textMuted uppercase tracking-wider mb-1.5 sm:mb-2">
               <span>{t.calculator.monthlyPayment}</span>
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono bg-palette-slate text-[#1a252e]">
                 Real-Time
@@ -648,34 +650,34 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
             </div>
 
             {/* Giant Monthly Payment Amount */}
-            <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-mono text-theme-text tracking-tight mb-4 break-words">
+            <div className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-mono text-theme-text tracking-tight mb-3 sm:mb-4 break-words">
               {fmt(financialResults.emi)}
             </div>
 
             {/* Secondary Output Cards */}
-            <div className="grid grid-cols-2 gap-3 pt-4 border-t border-theme-border/60">
-              <div className="p-3 rounded-2xl bg-theme-bg/60 border border-theme-border/40">
-                <div className="text-[11px] font-medium text-theme-textMuted mb-1 leading-tight">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-3.5 sm:pt-4 border-t border-theme-border/60">
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-theme-bg/60 border border-theme-border/40">
+                <div className="text-[11px] font-medium text-theme-textMuted mb-0.5 sm:mb-1 leading-tight">
                   {t.calculator.totalInterest}
                 </div>
-                <div className="text-base sm:text-lg font-bold font-mono text-theme-text">
+                <div className="text-sm sm:text-lg font-bold font-mono text-theme-text break-words">
                   {fmt(financialResults.totalInterest)}
                 </div>
               </div>
 
-              <div className="p-3 rounded-2xl bg-theme-bg/60 border border-theme-border/40">
-                <div className="text-[11px] font-medium text-theme-textMuted mb-1 leading-tight">
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-theme-bg/60 border border-theme-border/40">
+                <div className="text-[11px] font-medium text-theme-textMuted mb-0.5 sm:mb-1 leading-tight">
                   {t.calculator.totalPayment}
                 </div>
-                <div className="text-base sm:text-lg font-bold font-mono text-theme-text">
+                <div className="text-sm sm:text-lg font-bold font-mono text-theme-text break-words">
                   {fmt(financialResults.totalPayment)}
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-between text-xs text-theme-textMuted bg-theme-bg/40 px-3 py-2 rounded-xl border border-theme-border/30">
+            <div className="mt-3.5 sm:mt-4 flex items-center justify-between text-[11px] sm:text-xs text-theme-textMuted bg-theme-bg/40 px-3 py-2 rounded-xl border border-theme-border/30">
               <span className="flex items-center gap-1.5 font-medium">
-                <Calendar className="w-3.5 h-3.5 text-palette-slate" />
+                <Calendar className="w-3.5 h-3.5 text-palette-slate shrink-0" />
                 {t.calculator.payoffDate}:
               </span>
               <span className="font-bold text-theme-text">{financialResults.payoffDateStr}</span>
@@ -729,26 +731,26 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
       </div>
 
       {/* Interactive Amortization Schedule Section */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-theme-card border border-theme-border shadow-soft space-y-6 amortization-container">
+      <div className="p-4 sm:p-8 rounded-3xl bg-theme-card border border-theme-border shadow-soft space-y-5 sm:space-y-6 amortization-container">
         {/* Header and Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-theme-border/60">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 sm:gap-4 pb-4 border-b border-theme-border/60">
           <div>
-            <h3 className="text-xl font-extrabold text-theme-text flex items-center gap-2.5">
-              <TableIcon className="w-5 h-5 text-palette-slate" />
-              {t.calculator.scheduleTitle}
+            <h3 className="text-lg sm:text-xl font-extrabold text-theme-text flex items-center gap-2">
+              <TableIcon className="w-5 h-5 text-palette-slate shrink-0" />
+              <span>{t.calculator.scheduleTitle}</span>
             </h3>
-            <p className="text-xs sm:text-sm text-theme-textMuted mt-1">
+            <p className="text-xs sm:text-sm text-theme-textMuted mt-0.5 sm:mt-1">
               {t.calculator.scheduleSubtitle}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 no-print">
+          <div className="flex items-center gap-1.5 sm:gap-2 no-print overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full md:w-auto">
             {/* View Switcher: Annual vs Monthly */}
-            <div className="inline-flex rounded-xl border border-theme-border p-1 bg-theme-bg text-xs">
+            <div className="inline-flex rounded-xl border border-theme-border p-1 bg-theme-bg text-[11px] sm:text-xs shrink-0">
               <button
                 type="button"
                 onClick={() => setScheduleView('annual')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap ${
                   scheduleView === 'annual'
                     ? 'bg-palette-slate text-[#1a252e] shadow-sm'
                     : 'text-theme-textMuted hover:text-theme-text'
@@ -759,7 +761,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
               <button
                 type="button"
                 onClick={() => setScheduleView('monthly')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap ${
                   scheduleView === 'monthly'
                     ? 'bg-palette-slate text-[#1a252e] shadow-sm'
                     : 'text-theme-textMuted hover:text-theme-text'
@@ -773,10 +775,10 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
             <button
               type="button"
               onClick={handleExportCSV}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-theme-bg hover:bg-theme-bg/90 text-theme-text border border-theme-border transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-theme-bg hover:bg-theme-bg/90 text-theme-text border border-theme-border transition-all shadow-sm shrink-0 whitespace-nowrap"
               title={t.calculator.exportCsv}
             >
-              <Download className="w-3.5 h-3.5 text-palette-slate" />
+              <Download className="w-3.5 h-3.5 text-palette-slate shrink-0" />
               <span>{t.calculator.exportCsv}</span>
             </button>
 
@@ -784,10 +786,10 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ locale }) => {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-theme-bg hover:bg-theme-bg/90 text-theme-text border border-theme-border transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-theme-bg hover:bg-theme-bg/90 text-theme-text border border-theme-border transition-all shadow-sm shrink-0 whitespace-nowrap"
               title={t.calculator.printSchedule}
             >
-              <Printer className="w-3.5 h-3.5 text-theme-textMuted" />
+              <Printer className="w-3.5 h-3.5 text-theme-textMuted shrink-0" />
               <span className="hidden sm:inline">{t.calculator.printSchedule}</span>
             </button>
           </div>

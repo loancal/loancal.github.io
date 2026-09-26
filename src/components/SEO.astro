@@ -90,7 +90,7 @@ const webApplicationSchema = {
   },
 };
 
-// 3. SoftwareApplication Schema with Aggregate Ratings
+// 3. SoftwareApplication Schema
 const softwareApplicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -104,13 +104,6 @@ const softwareApplicationSchema = {
     '@type': 'Offer',
     price: '0.00',
     priceCurrency: 'USD',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.95',
-    ratingCount: '1240',
-    bestRating: '5',
-    worstRating: '1',
   },
 };
 

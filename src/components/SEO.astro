@@ -18,7 +18,7 @@ interface Props {
 const {
   title,
   description,
-  keywords = 'loan calculator, emi calculator, mortgage calculator, amortization schedule',
+  keywords = 'loan calculator, emi calculator, mortgage calculator, amortization schedule, loan amortization, interest calculator, car loan calculator, home loan',
   locale,
   canonicalPath = '',
   faqs = [],
@@ -29,29 +29,46 @@ const canonicalURL = canonicalPath
   ? `${siteUrl}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
   : `${siteUrl}${locale === 'en' ? '/' : `/${locale}/`}`;
 
-const ogImageURL = `${siteUrl}/og-image.png`;
+// High-Performance Cloudinary CDN OpenGraph Image
+const ogImageURL = 'https://res.cloudinary.com/dpx6w78bt/image/upload/f_auto/q_auto/v1786342039/Online_Tool_rc1ybr.png';
 
-// JSON-LD Structured Data
+// 1. WebSite Schema with SearchAction / Publisher metadata
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': `${siteUrl}/#website`,
-  url: siteUrl,
+  url: `${siteUrl}/`,
   name: 'LoanCal',
-  alternateName: 'LoanCal Financial EMI & Loan Calculator',
+  alternateName: ['LoanCal Financial Calculator', 'LoanCal EMI Calculator'],
   description,
-  inLanguage: locale,
+  inLanguage: ['en', 'es', 'pt', 'de', 'fr', 'ja'],
+  publisher: {
+    '@type': 'Organization',
+    name: 'LoanCal',
+    url: `${siteUrl}/`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/favicon.svg`,
+      width: '64',
+      height: '64',
+    },
+  },
 };
 
+// 2. WebApplication Schema
 const webApplicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
   '@id': `${siteUrl}/#webapp`,
   name: title,
   url: canonicalURL,
+  image: ogImageURL,
+  screenshot: ogImageURL,
   applicationCategory: 'FinancialApplication',
+  applicationSubCategory: 'Loan & Mortgage Amortization Calculator',
   operatingSystem: 'All',
   browserRequirements: 'Requires JavaScript. Requires HTML5.',
+  isAccessibleForFree: true,
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -59,12 +76,12 @@ const webApplicationSchema = {
   },
   featureList: [
     'Instant Equated Monthly Installment (EMI) calculation',
-    'Zero-server 100% client-side privacy protection',
-    'Interactive dynamic amortization schedule',
-    'Annual and monthly repayment view toggle',
-    'CSV export for Microsoft Excel and Google Sheets',
-    'Printer-friendly financial amortization sheet',
-    'Multilingual support for 6 global languages',
+    'Zero-server 100% client-side computational privacy',
+    'Interactive dynamic amortization schedule with yearly and monthly breakdown',
+    'One-click client-side CSV spreadsheet export',
+    'Printer-friendly financial payoff document formatting',
+    'Multi-currency support across USD, EUR, GBP, JPY, BRL, and INR',
+    'Seamless native multilingual support across 6 global languages',
   ],
   author: {
     '@type': 'Person',
@@ -73,6 +90,7 @@ const webApplicationSchema = {
   },
 };
 
+// 3. SoftwareApplication Schema with Aggregate Ratings
 const softwareApplicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -81,6 +99,7 @@ const softwareApplicationSchema = {
   applicationCategory: 'FinancialApplication',
   operatingSystem: 'Any modern web browser',
   softwareVersion: '1.0.0',
+  isAccessibleForFree: true,
   offers: {
     '@type': 'Offer',
     price: '0.00',
@@ -95,6 +114,31 @@ const softwareApplicationSchema = {
   },
 };
 
+// 4. BreadcrumbList Schema (Google Rich Snippets)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}/`,
+    },
+    ...(locale !== 'en'
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: LOCALES.find((l) => l.code === locale)?.nativeName || locale,
+            item: canonicalURL,
+          },
+        ]
+      : []),
+  ],
+};
+
+// 5. FAQPage Schema (Google Rich Accordion SERP snippets)
 const faqSchema =
   faqs.length > 0
     ? {
@@ -112,6 +156,10 @@ const faqSchema =
     : null;
 ---
 
+<!-- Resource Preconnects for CDN & Typography Performance -->
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+
 <!-- Essential Meta Tags -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -120,6 +168,15 @@ const faqSchema =
 <meta name="keywords" content={keywords} />
 <meta name="author" content="LoanCal" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="rating" content="general" />
+<meta name="distribution" content="global" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="application-name" content="LoanCal" />
+<meta name="apple-mobile-web-app-title" content="LoanCal" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -134,13 +191,17 @@ const faqSchema =
   />
 ))}
 
-<!-- Strict Open Graph Metadata (MUST include og:site_name = LoanCal) -->
+<!-- Strict Open Graph Metadata (100% Spec Compliance) -->
 <meta property="og:site_name" content="LoanCal" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
+<meta property="og:image:secure_url" content={ogImageURL} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="LoanCal - Free Secure Loan & EMI Calculator" />
 <meta property="og:locale" content={locale === 'en' ? 'en_US' : locale} />
 
@@ -150,6 +211,7 @@ const faqSchema =
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content="LoanCal - Free Secure Loan & EMI Calculator" />
 
 <!-- Favicon & Touch Icons -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -161,6 +223,7 @@ const faqSchema =
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 {faqSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 )}

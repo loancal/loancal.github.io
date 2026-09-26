@@ -1,0 +1,47 @@
+---
+import SEO from '../components/SEO.astro';
+import ThemeScript from '../components/ThemeScript.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getTranslations, type Locale } from '../i18n/translations';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  canonicalPath?: string;
+}
+
+const { locale, canonicalPath } = Astro.props;
+const t = getTranslations(locale);
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <ThemeScript />
+    <SEO
+      title={t.meta.title}
+      description={t.meta.description}
+      keywords={t.meta.keywords}
+      locale={locale}
+      canonicalPath={canonicalPath}
+      faqs={t.faq}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-theme-bg text-theme-text min-h-screen flex flex-col font-sans selection:bg-palette-slate selection:text-palette-mocha">
+    <Navbar locale={locale} currentPath={currentPath} />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer locale={locale} currentPath={currentPath} />
+  </body>
+</html>

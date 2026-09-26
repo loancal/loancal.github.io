@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Required Exact Palette:
+       #B7C4CF (Powder Slate Accent)
+       #EEE3CB (Warm Cream Canvas)
+       #D7C0AE (Warm Sand Surface)
+       #967E76 (Earth Mocha Text / Dark Canvas)
+    */
+
+    /* Light Mode */
+    --color-bg: #EEE3CB;
+    --color-card: #D7C0AE;
+    --color-card-hover: #cfb6a3;
+    --color-border: #c4ad9b;
+    --color-border-subtle: rgba(150, 126, 118, 0.2);
+    --color-text: #2C221E; /* High readability dark earth */
+    --color-text-muted: #6B554F; /* Readable secondary mocha */
+    --color-accent: #B7C4CF;
+    --color-accent-hover: #a1b2be;
+    --color-accent-text: #1E2B35;
+  }
+
+  .dark {
+    /* Dark Mode */
+    --color-bg: #967E76; /* Dark background per specification */
+    --color-card: rgba(215, 192, 174, 0.18); /* #D7C0AE opacity adjusted per spec */
+    --color-card-hover: rgba(215, 192, 174, 0.26);
+    --color-border: rgba(238, 227, 203, 0.25);
+    --color-border-subtle: rgba(238, 227, 203, 0.12);
+    --color-text: #EEE3CB; /* #EEE3CB text per spec */
+    --color-text-muted: #D7C0AE; /* Sand muted text */
+    --color-accent: #B7C4CF; /* #B7C4CF accent per spec */
+    --color-accent-hover: #c9d5df;
+    --color-accent-text: #1E2B35;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom Financial Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-border);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2.5px solid var(--color-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2.5px solid var(--color-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover,
+input[type="range"]:focus::-webkit-slider-thumb {
+  transform: scale(1.18);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Custom Scrollbar for Schedule Table */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Print Stylesheet for Financial Amortization */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .amortization-container {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  table {
+    width: 100% !important;
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}

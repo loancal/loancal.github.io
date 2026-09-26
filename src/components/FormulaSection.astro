@@ -1,0 +1,64 @@
+---
+import { getTranslations, type Locale } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="p-8 sm:p-10 rounded-3xl bg-theme-card border border-theme-border shadow-soft">
+    <div class="max-w-3xl">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-theme-text mb-2">
+        {t.formula.title}
+      </h2>
+      <p class="text-sm text-theme-textMuted mb-8">
+        {t.formula.subtitle}
+      </p>
+
+      <!-- Formula Display Box -->
+      <div class="p-6 rounded-2xl bg-theme-bg border border-theme-border/80 shadow-inner flex flex-col items-center justify-center mb-8">
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-theme-text flex items-center gap-3">
+          <span>E =</span>
+          <div class="inline-flex flex-col items-center">
+            <span class="border-b-2 border-theme-text pb-1 px-3">
+              P &times; r &times; (1 + r)<sup>n</sup>
+            </span>
+            <span class="pt-1 px-3">
+              (1 + r)<sup>n</sup> - 1
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variable Legend -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-xl bg-theme-bg/50 border border-theme-border/40">
+          <span class="font-mono font-bold text-palette-mocha dark:text-palette-slate text-sm block mb-1">
+            P (Principal)
+          </span>
+          <p class="text-xs text-theme-textMuted">{t.formula.legendP}</p>
+        </div>
+        <div class="p-4 rounded-xl bg-theme-bg/50 border border-theme-border/40">
+          <span class="font-mono font-bold text-palette-mocha dark:text-palette-slate text-sm block mb-1">
+            r (Rate per Period)
+          </span>
+          <p class="text-xs text-theme-textMuted">{t.formula.legendR}</p>
+        </div>
+        <div class="p-4 rounded-xl bg-theme-bg/50 border border-theme-border/40">
+          <span class="font-mono font-bold text-palette-mocha dark:text-palette-slate text-sm block mb-1">
+            n (Total Periods)
+          </span>
+          <p class="text-xs text-theme-textMuted">{t.formula.legendN}</p>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-theme-textMuted leading-relaxed">
+        {t.formula.explanation}
+      </p>
+    </div>
+  </div>
+</section>

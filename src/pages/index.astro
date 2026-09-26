@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LoanCalculator from '../components/LoanCalculator';
+import Features from '../components/Features.astro';
+import FormulaSection from '../components/FormulaSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import SupportBanner from '../components/SupportBanner.astro';
+import { getTranslations } from '../i18n/translations';
+
+const locale = 'en';
+const t = getTranslations(locale);
+---
+
+<Layout locale={locale}>
+  <!-- Hero Section -->
+  <section class="relative pt-10 pb-6 sm:pt-14 sm:pb-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme-border text-xs font-mono font-bold text-theme-text mb-4 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        {t.hero.tag}
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text max-w-4xl mx-auto leading-tight">
+        {t.hero.title}
+      </h1>
+
+      <p class="mt-4 text-sm sm:text-lg text-theme-textMuted max-w-2xl mx-auto leading-relaxed">
+        {t.hero.subtitle}
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Financial Calculator React Island -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+    <LoanCalculator client:load locale={locale} />
+  </section>
+
+  <!-- Key Value Props / Features -->
+  <Features locale={locale} />
+
+  <!-- Mathematical Formula Explanation -->
+  <FormulaSection locale={locale} />
+
+  <!-- Developer Support Callout -->
+  <SupportBanner locale={locale} />
+
+  <!-- FAQ Accordion (Injected into FAQPage Schema) -->
+  <FAQSection locale={locale} />
+</Layout>

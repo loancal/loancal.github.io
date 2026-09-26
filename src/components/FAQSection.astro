@@ -1,0 +1,41 @@
+---
+import { getTranslations, type Locale } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-theme-text">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-sm text-theme-textMuted mt-2">
+        Financial terminology and calculation principles explained simply.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {t.faq.map((item) => (
+        <details class="group p-5 rounded-2xl bg-theme-card border border-theme-border/70 shadow-soft transition-all duration-200 open:shadow-soft-lg">
+          <summary class="flex items-center justify-between cursor-pointer list-none font-bold text-theme-text text-sm sm:text-base focus:outline-none">
+            <span class="pr-4">{item.question}</span>
+            <span class="w-7 h-7 rounded-lg bg-theme-bg flex items-center justify-center shrink-0 text-theme-textMuted group-open:rotate-180 transition-transform duration-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-4 pt-4 border-t border-theme-border/40 text-xs sm:text-sm text-theme-textMuted leading-relaxed">
+            {item.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

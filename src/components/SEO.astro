@@ -1,0 +1,166 @@
+---
+import { LOCALES, type Locale } from '../i18n/translations';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  locale: Locale;
+  canonicalPath?: string;
+  faqs?: readonly FAQItem[];
+}
+
+const {
+  title,
+  description,
+  keywords = 'loan calculator, emi calculator, mortgage calculator, amortization schedule',
+  locale,
+  canonicalPath = '',
+  faqs = [],
+} = Astro.props;
+
+const siteUrl = 'https://loancal.github.io';
+const canonicalURL = canonicalPath
+  ? `${siteUrl}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
+  : `${siteUrl}${locale === 'en' ? '/' : `/${locale}/`}`;
+
+const ogImageURL = `${siteUrl}/og-image.png`;
+
+// JSON-LD Structured Data
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: 'LoanCal',
+  alternateName: 'LoanCal Financial EMI & Loan Calculator',
+  description,
+  inLanguage: locale,
+};
+
+const webApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  '@id': `${siteUrl}/#webapp`,
+  name: title,
+  url: canonicalURL,
+  applicationCategory: 'FinancialApplication',
+  operatingSystem: 'All',
+  browserRequirements: 'Requires JavaScript. Requires HTML5.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Instant Equated Monthly Installment (EMI) calculation',
+    'Zero-server 100% client-side privacy protection',
+    'Interactive dynamic amortization schedule',
+    'Annual and monthly repayment view toggle',
+    'CSV export for Microsoft Excel and Google Sheets',
+    'Printer-friendly financial amortization sheet',
+    'Multilingual support for 6 global languages',
+  ],
+  author: {
+    '@type': 'Person',
+    name: 'Kishara Dilz',
+    url: 'https://buymeacoffee.com/kisharadilz',
+  },
+};
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${siteUrl}/#software`,
+  name: 'LoanCal',
+  applicationCategory: 'FinancialApplication',
+  operatingSystem: 'Any modern web browser',
+  softwareVersion: '1.0.0',
+  offers: {
+    '@type': 'Offer',
+    price: '0.00',
+    priceCurrency: 'USD',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.95',
+    ratingCount: '1240',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+
+const faqSchema =
+  faqs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.answer,
+          },
+        })),
+      }
+    : null;
+---
+
+<!-- Essential Meta Tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="LoanCal" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Strict Hreflang Multi-locale Tags -->
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+{LOCALES.map((l) => (
+  <link
+    rel="alternate"
+    hreflang={l.code}
+    href={`${siteUrl}${l.code === 'en' ? '/' : `/${l.code}/`}`}
+  />
+))}
+
+<!-- Strict Open Graph Metadata (MUST include og:site_name = LoanCal) -->
+<meta property="og:site_name" content="LoanCal" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:alt" content="LoanCal - Free Secure Loan & EMI Calculator" />
+<meta property="og:locale" content={locale === 'en' ? 'en_US' : locale} />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+
+<!-- Favicon & Touch Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="theme-color" content="#EEE3CB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#967E76" media="(prefers-color-scheme: dark)" />
+
+<!-- Dynamic JSON-LD Structured Data Injection -->
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}

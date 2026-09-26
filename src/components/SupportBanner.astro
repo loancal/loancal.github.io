@@ -1,0 +1,46 @@
+---
+import { getTranslations, type Locale } from '../i18n/translations';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="relative overflow-hidden rounded-3xl bg-palette-slate/25 dark:bg-palette-slate/15 border-2 border-palette-slate/60 p-8 sm:p-10 shadow-soft">
+    <div class="max-w-3xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-palette-slate text-[#1a252e] text-xs font-bold font-mono">
+          Free &bull; Open &bull; Zero Ads
+        </div>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-theme-text tracking-tight">
+          Help Keep LoanCal Free and Independent
+        </h3>
+        <p class="text-xs sm:text-sm text-theme-textMuted leading-relaxed max-w-xl">
+          LoanCal runs 100% in your browser without paywalls or data harvesting. If this calculator helped you plan your finances or save money, buying a coffee is the best way to support ongoing development!
+        </p>
+      </div>
+
+      <div class="shrink-0">
+        <a
+          href="https://buymeacoffee.com/kisharadilz"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-palette-slate hover:bg-[#a3b3bf] text-[#1a252e] font-extrabold text-sm sm:text-base shadow-soft-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 transition-all border border-palette-slate/60"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1a252e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+            <line x1="6" x2="6" y1="2" y2="4"></line>
+            <line x1="10" x2="10" y1="2" y2="4"></line>
+            <line x1="14" x2="14" y1="2" y2="4"></line>
+          </svg>
+          <span>{t.nav.support}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+// Inline script to prevent theme flash (FOUC)
+---
+<script is:inline>
+  (function () {
+    try {
+      const storedTheme = localStorage.getItem('loancal_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  })();
+</script>

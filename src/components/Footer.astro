@@ -1,0 +1,106 @@
+---
+import { LOCALES, getTranslations, type Locale } from '../i18n/translations';
+import { getLocalizedPath } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  currentPath?: string;
+}
+
+const { locale, currentPath = '/' } = Astro.props;
+const t = getTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full border-t border-theme-border/50 bg-theme-card/30 mt-20 transition-colors">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <!-- Col 1: About & Trust -->
+      <div class="md:col-span-6 space-y-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-palette-mocha dark:bg-palette-slate flex items-center justify-center text-palette-cream dark:text-palette-mocha font-bold text-sm">
+            LC
+          </div>
+          <span class="text-lg font-extrabold tracking-tight text-theme-text">LoanCal</span>
+        </div>
+        <p class="text-xs sm:text-sm text-theme-textMuted max-w-md leading-relaxed">
+          {t.footer.about}
+        </p>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono bg-theme-card border border-theme-border/60 text-theme-text">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          {t.footer.privacyBadge}
+        </div>
+      </div>
+
+      <!-- Col 2: International Versions -->
+      <div class="md:col-span-3 space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text">
+          {t.nav.changeLanguage}
+        </h4>
+        <ul class="grid grid-cols-2 gap-2 text-xs">
+          {LOCALES.map((l) => {
+            const href = getLocalizedPath(currentPath, l.code);
+            return (
+              <li>
+                <a
+                  href={href}
+                  class={`hover:underline flex items-center gap-1.5 transition-colors ${
+                    l.code === locale
+                      ? 'font-bold text-theme-text'
+                      : 'text-theme-textMuted hover:text-theme-text'
+                  }`}
+                >
+                  <span>{l.flag}</span>
+                  <span>{l.nativeName}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <!-- Col 3: Developer Support -->
+      <div class="md:col-span-3 space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text">
+          Developer Support
+        </h4>
+        <p class="text-xs text-theme-textMuted leading-relaxed">
+          LoanCal is freely maintained without intrusive advertising or tracking. If this tool saved you time, consider buying a coffee!
+        </p>
+        <a
+          href="https://buymeacoffee.com/kisharadilz"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-palette-slate hover:bg-[#a3b3bf] text-[#1a252e] font-bold text-xs shadow-soft transition-transform active:scale-95"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#1a252e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+            <line x1="6" x2="6" y1="2" y2="4"></line>
+            <line x1="10" x2="10" y1="2" y2="4"></line>
+            <line x1="14" x2="14" y1="2" y2="4"></line>
+          </svg>
+          <span>{t.nav.support}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-theme-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-textMuted">
+      <div>
+        &copy; {year} LoanCal. {t.footer.allRights}
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Static Site Generation (Astro + React)</span>
+        <span>•</span>
+        <a
+          href="https://github.com/loancal/loancal.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-theme-text underline"
+        >
+          GitHub Repository
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

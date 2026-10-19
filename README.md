@@ -2,12 +2,12 @@
 
 [![Deployment](https://github.com/loancal/loancal.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/loancal/loancal.github.io/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Support on Buy Me A Coffee](https://img.shields.io/badge/Support-Buy%20Me%20A%20Coffee-yellow.svg)](https://buymeacoffee.com/kisharadilz)
+[![Support on Ko-fi](https://img.shields.io/badge/Support-Ko--fi-ff5e5b.svg)](https://ko-fi.com/kishara)
 
 A 100% client-side, zero-server financial loan and EMI calculator built with **Astro (SSG)**, **React (Islands Architecture)**, and **Tailwind CSS**. Engineered for instantaneous mathematical feedback, deep privacy, and maximum technical SEO.
 
 🌐 **Live URL**: [https://loancal.github.io](https://loancal.github.io)  
-☕ **Developer Support**: [https://buymeacoffee.com/kisharadilz](https://buymeacoffee.com/kisharadilz)
+☕ **Developer Support**: [https://ko-fi.com/kishara](https://ko-fi.com/kishara)
 
 ---
 
@@ -110,7 +110,7 @@ npm run preview
 
 If LoanCal helped you plan your mortgage, car loan, or personal financing, consider buying a coffee to keep this utility free, independent, and ad-free:
 
-👉 **[buymeacoffee.com/kisharadilz](https://buymeacoffee.com/kisharadilz)**
+👉 **[ko-fi.com/kishara](https://ko-fi.com/kishara)**
 
 ---
 

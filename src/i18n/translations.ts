@@ -118,7 +118,7 @@ export const translations = {
     ],
     footer: {
       about: 'LoanCal is a free, open-source, client-first financial utility designed to provide instantaneous, transparent, and private loan calculations.',
-      supportDev: 'Support the Developer on Ko-fi',
+      supportDev: 'Support the Developer on Gumroad',
       privacyBadge: 'No cookies • Zero telemetry • 100% Client-Side',
       allRights: 'All rights reserved.',
     },
@@ -229,7 +229,7 @@ export const translations = {
     ],
     footer: {
       about: 'LoanCal es una herramienta financiera gratuita, de código abierto y de máxima privacidad diseñada para cálculos rápidos y seguros.',
-      supportDev: 'Apoyar al Desarrollador en Ko-fi',
+      supportDev: 'Apoyar al Desarrollador en Gumroad',
       privacyBadge: 'Sin cookies • Cero telemetría • 100% en el Cliente',
       allRights: 'Todos los derechos reservados.',
     },
@@ -340,7 +340,7 @@ export const translations = {
     ],
     footer: {
       about: 'O LoanCal é uma ferramenta financeira livre, independente e focada na privacidade para simulações claras e precisas.',
-      supportDev: 'Apoiar o Desenvolvedor no Ko-fi',
+      supportDev: 'Apoiar o Desenvolvedor no Gumroad',
       privacyBadge: 'Sem cookies • Zero rastreamento • 100% no Cliente',
       allRights: 'Todos os direitos reservados.',
     },
@@ -451,7 +451,7 @@ export const translations = {
     ],
     footer: {
       about: 'LoanCal ist ein kostenloses, werbefreies und datenschutzorientiertes Finanzwerkzeug für transparente Darlehensberechnungen.',
-      supportDev: 'Entwickler auf Ko-fi unterstützen',
+      supportDev: 'Entwickler auf Gumroad unterstützen',
       privacyBadge: 'Ohne Cookies • Keine Telemetrie • 100% Client-Side',
       allRights: 'Alle Rechte vorbehalten.',
     },
@@ -562,7 +562,7 @@ export const translations = {
     ],
     footer: {
       about: 'LoanCal est un utilitaire financier gratuit, open-source et centré sur le respect de la vie privée pour des simulations fiables.',
-      supportDev: 'Soutenir le Développeur sur Ko-fi',
+      supportDev: 'Soutenir le Développeur sur Gumroad',
       privacyBadge: 'Sans cookies • Zéro télémétrie • 100% Côté Client',
       allRights: 'Tous droits réservés.',
     },
@@ -673,7 +673,7 @@ export const translations = {
     ],
     footer: {
       about: 'LoanCalは、利用者のプライバシーを最優先に考えた、登録不要・安全・高機能な無料オンライン金融計算ツールです。',
-      supportDev: 'Ko-fiで開発者を応援する',
+      supportDev: 'Gumroadで開発者を応援する',
       privacyBadge: 'クッキー不使用 • トラッキングゼロ • 100% クライアント処理',
       allRights: 'All rights reserved.',
     },
